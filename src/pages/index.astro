@@ -1,8 +1,10 @@
 ---
 import '/src/pages/styles/global.css';
 import Navigation from '/src/pages/components/Navigation.astro';
+import Footer from '/src/pages/components/Footer.astro';
 
-const pageTitle = "Home Page";
+
+const pageTitle = "Home Page - Página de inicio";
 ---
 
 <html lang="en">
@@ -16,14 +18,8 @@ const pageTitle = "Home Page";
 	</head>
 	
 	<body>
-	    <a href="/">Inicio</a>
-        <a href="/about/">Sobre mi</a>
-        <a href="/blog/">Mi Blog</a>
-
-
-		<h1>Astro</h1>
-		<h1> Mi sitio Astro</h1>
-		<h1>Es un ejemplo</h1>
-		<h1>Es un ejemplo</h1>
+	   <Navigation />         
+		 <h1>{pageTitle}</h1>
+	 <Footer />
 	</body>
 </html>
