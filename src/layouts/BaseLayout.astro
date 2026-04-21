@@ -4,10 +4,8 @@ import Header from '/src/pages/components/Header.astro';
 import Footer from '/src/pages/components/Footer.astro';
 
 const { pageTitle } = Astro.props;
+
 ---
-
-
-
 
 <html lang="en">
 	<head>
@@ -17,27 +15,29 @@ const { pageTitle } = Astro.props;
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
 		<title>Astro</title>
+		<style define:vars={{skillColor, fontWeight, textCase}}>
+        h1 {
+        color: purple;
+        font-size: 4rem;
+        }
+       .skill {
+        color: var(--skillColor);        
+        font-weight: var(fontWeight);
+        text-transform: var(--textCase);
+       }
+     </style>
 	</head>
-
-    
-
+	
 	<body>
-        <Header/>
+	   <Header />         
+	   <h1>{pageTitle}</h1>
 
-        <h1>Mi sitio Astro</h1>
-        <h1>Mi blog de Astro aprendizaje</h1>
-        <p>Aquí es donde publicaré sobre mi viaje de aprendizaje Astro.</p>
-         <ul>
-         <li><a href="/posts/post-1/">Publicación 1</a></li>
-         <li><a href="/posts/post-2/">Publicación 2</a></li>
-         <li><a href="/posts/post-3/">Publicación 3</a></li>
-         </ul>
+       <slot />
 
-    <Footer />
-     <script>
+	   <Footer />
+    <script>
 	  import  '/src/pages/scripts/menu.js';
 	</script> 
 
-    </body>
-    
+	</body>
 </html>
