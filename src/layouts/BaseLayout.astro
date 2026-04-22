@@ -1,43 +1,60 @@
 ---
+
 import '/src/pages/styles/global.css';
 import Header from '/src/pages/components/Header.astro';
 import Footer from '/src/pages/components/Footer.astro';
 
-const { pageTitle } = Astro.props;
-
+const {
+  pageTitle,
+  skillColor = "crimson",
+  fontWeight = "bold",
+  textCase = "uppercase",
+} = Astro.props;
 ---
 
+
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-		<style define:vars={{skillColor, fontWeight, textCase}}>
-        h1 {
-        color: purple;
-        font-size: 4rem;
-        }
-       .skill {
-        color: var(--skillColor);        
-        font-weight: var(fontWeight);
-        text-transform: var(--textCase);
-       }
-     </style>
-	</head>
-	
-	<body>
-	   <Header />         
-	   <h1>{pageTitle}</h1>
+    <head>
+        <meta charset="utf-8" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="icon" href="/favicon.ico" />
+        <meta name="viewport" content="width=device-width" />
+        <meta name="generator" content={Astro.generator} />
+        <title>{pageTitle}</title>
+
+        <style>
+          /* estilos globales para que afecten al contenido de las páginas */
+          :global(h1) {
+            color: purple;
+            font-size: 4rem;
+            margin: 0 0 1rem 0;
+          }
+
+          /* valores por defecto; pueden sobrescribirse por página vía props */
+          :root {
+            --skill-color: crimson;
+            --skill-weight: bold;
+            --skill-case: uppercase;
+          }
+
+          :global(.skill) {
+            color: var(--skill-color);
+            font-weight: var(--skill-weight);
+            text-transform: var(--skill-case);
+          }
+        </style>
+    </head>
+    
+    <body style={`--skill-color:${skillColor}; --skill-weight:${fontWeight}; --skill-case:${String(textCase).toLowerCase()}`}>
+       <Header />         
+       <h1>{pageTitle}</h1>
 
        <slot />
 
-	   <Footer />
-    <script>
-	  import  '/src/pages/scripts/menu.js';
-	</script> 
+       <Footer />
+    <script type="module">
+      import '/src/pages/scripts/menu.js';
+    </script> 
 
-	</body>
+    </body>
 </html>
