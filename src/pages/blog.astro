@@ -7,7 +7,6 @@ import BlogPost from '../components/BlogPost.astro';
 
 const allPosts = Object.values(import.meta.glob('./posts/*.md', { eager: true }));
 
-console.log("all ",allPosts)
 
 const pageTitle  = "Mi sitio Astro";
 
@@ -18,12 +17,13 @@ const textCase = "UpperCase";
 ---
 
 
-<BaseLayout pageTitle={pageTitle}skillColor={skillColor} fontWeight={fontWeight} textCase={textCase}>
+<BaseLayout pageTitle={pageTitle}>
 
- <h1 style="color: purple; font-size: 2rem; margin: 0 0 1rem 0;">Mi blog de Astro aprendizaje</h1>
+ 
         <p>Aquí es donde publicaré sobre mi viaje de aprendizaje Astro.</p>
-         <ul>           
-          {allPosts.map((post: any) => <li><a href={post.url}>{post.frontmatter.title}</a></li>)}
+         <ul>         
+          
+           {allPosts.map((post: any) => <BlogPost url={post.url} title={post.frontmatter.title} />)}
          </ul>
 
 </BaseLayout>
